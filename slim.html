@@ -1,0 +1,75 @@
+<html>
+<!-- this shows the most basic implementation of a humun shop with no styling -->
+<div class="humun-slim">
+
+
+    <!-- humun items list -->
+   <div id="humun-items"><!-- humun.js injects unstyled item divs --></div>
+    <!-- end humun items list -->
+
+   <!-- humun check out form -->
+   <div id="humun-checkout-form">
+       <form id="humun-checkout-form-input">
+            <input type="text" id="humun-checkout-form-email" name="Email" placeholder="Email"><br>
+            <input type="text" id="humun-checkout-form-name" name="Name" placeholder="Name"><br>
+            <input type="text" id="humun-checkout-form-address1" name="Address1" placeholder="Address1"><br>
+            <input type="text" id="humun-checkout-form-address2" name="Address2" placeholder="Address2"><br>
+            <input type="text" id="humun-checkout-form-city" name="City" placeholder="City"><br>
+            <input type="text" id="humun-checkout-form-state" name="State" placeholder="State"><br>
+            <input type="text" id="humun-checkout-form-zip" name="Zip" placeholder="Zip"><br>
+            <input type="text" id="humun-checkout-form-country" name="Country" placeholder="Country"><br>
+
+            <!-- humun optional for nft products -->
+            <input type="text" id="humun-checkout-form-ethaddress" name="EthAddress" placeholder="EthAddress"><br>
+        </form>
+        <!-- humun connect eth wallet -->
+        <button class='button' id='humun-connect-wallet'>connect wallet</button>
+        <!-- end humun optional for nft products -->
+   </div>
+   <!-- end humun check out form -->
+
+   <!-- humun payment form -->
+   <div class="payment-form">
+       <!-- humun payment options  -->
+        <button id='humun-select-card-payment'>Card Payment</button>
+        <button id='humun-select-crypto-payment'>Crypto Payment</button>
+        <!-- end humun payment options  -->
+
+        <!-- humun payment options - card  -->
+        <div class="payment-input card" >
+            <form id="humun-payment-form">
+                <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+                <button id="submit"><span id="button-text" >pay now</span></button>
+            </form>
+        </div>
+        <!-- end humun payment options - card  -->
+
+
+        <!-- humun payment options - crypto  -->
+        <div class="payment-input crypto">
+            <div id="humun-crypto-prices"><!-- humun.js injects the price element --></div>
+            <div id="humun-crypto-address-list"><!-- humun.js injects the address element --></div>
+            <div id="humun-nft-wait-for-mint" class="note"><p>do not leave this page until payment is complete.</p></div>
+        </div>
+        <!-- end humun payment options - card  -->
+
+        <!-- humun status  -->
+        <div id="humun-status"><!-- humun.js injects the status/error --></div>
+        <!-- end humun status  -->
+   </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/humun-v0.0.2.js"></script>
+
+<script>
+    // tenant ID: optional. default: all.
+    let humunTenant = '';
+    // container: optional. DOM container which contains all humun elements. default: body.
+    let container = document.querySelector('.humun-slim')
+    // initialize client and get first 100 items
+    Humun.Init(humunTenant, container);
+</script>
+</html>

@@ -1,0 +1,20 @@
+<html>
+    
+<!-- humun magic dom -->
+<div id="humun-magic"></div>
+<!-- end humun magic dom -->
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/humun-v0.0.2.js"></script>
+
+<script>
+    // tenant ID: optional. default: all.
+    let humunTenant = '';
+    // container: optional. DOM container which contains all humun elements. default: body.
+    let container = document.querySelector('.humun-slim')
+    // initialize client and get first 100 items
+    Humun.Init(humunTenant, container);
+</script>
+</html>
