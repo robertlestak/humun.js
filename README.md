@@ -305,7 +305,17 @@ Defaults to `https://humun.us/api/v1`, can be overridden for development.
 - on user select Humun.items[*], Humun.addToCheckout(item) and show them checkout page
 - on checkout page collect user information and set to Humun.checkout
     - if using card, Humun.setCardPayment()
+        - This will create a payment intent which will enable the user to process a payment with the Stripe.js library
     - if using crypto, Humun.setCryptoPayment()
-- [Customer will process payment]
+        - This will populate the crypto prices and addresses, which are accessible through `Humun.crypto_pricing()` and `Humun.crypto_addresses()` which should be displayed to the user
+        - this will start polling all supported blockchains for payments received on customer receive address
+- For both card and crypto payments, the user completes the purchase out of band of Humun.js (through Stripe SDK, or on-chain crypto payments).
+    - Once payment has been completed by supported payment method, `Humun.checkoutNow()` will be called by either the Stripe callback or crypto watcher. This will create a new order, which will also validate payment for transaction ID.
 - Either watch the state with StateFx or access Humun.status.state for checkout-complete
 - on checkout-complete, display thank you page
+
+### Testing Payment Flow
+
+In DEV environment, card client is initialized in test mode and can be tested using [supported test cards](https://stripe.com/docs/testing).
+
+There is currently not a "test net" integration for crypto payments. To test crypto payment flow, test up to the point where you have presented the crypto pricing and addresses to the client, and verify that the `Humun.checkCryptoTx()` function is firing every `5 seconds` with the order request payload. As payment validation is done by the API, you will not be able to fully create a test order using crypto payment, you will need to manually trigger the [close-out functions](https://github.com/robertlestak/humun.js/blob/3aee37f9035d19c70f82b2755fc39759c5e51285/src/humun-v0.0.2.js#L790) in the JS console. We are investigating options for a testnet crypto integration in DEV env.

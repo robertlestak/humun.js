@@ -1,8 +1,10 @@
 <html>
-    
-<!-- humun magic dom -->
-<div id="humun-magic"></div>
-<!-- end humun magic dom -->
+
+<body>
+    <!-- humun magic dom -->
+    <div id="humun-magic"></div>
+    <!-- end humun magic dom -->
+</body>
 
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
@@ -13,7 +15,7 @@
     // tenant ID: optional. default: all.
     let humunTenant = '';
     // container: optional. DOM container which contains all humun elements. default: body.
-    let container = document.querySelector('.humun-slim')
+    let container = document.querySelector('body')
     // initialize client and get first 100 items
     Humun.Init(humunTenant, container);
 </script>
