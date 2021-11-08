@@ -794,11 +794,11 @@ Humun.checkoutNow = function(payment) {
             this.Status()
             this.checkout = {};
             resolve(response);
-        } catch(e) {
+        } catch(error) {
             console.log(error);
             this.errorMessage = error.response.data;
             this.status.loading = false;
-            reject(e);
+            reject(error);
         }
     }.bind(this))
 }
