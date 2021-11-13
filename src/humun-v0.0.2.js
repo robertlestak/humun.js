@@ -189,19 +189,28 @@ Humun.initDOM = function(container) {
 
 // Humun.Init initializes the client
 Humun.Init = function(tenant, container) {
-    if (tenant) {
-        this.Tenant(tenant)
-    }
-    this.MagicDOM()
-    if (!this.payment.stripeStyle.base) {
-        this.setDefaultStripeStyle()
-    }
-    this.getCardPublicKey();
-    this.initDOM(container);
-    this.status.state = 'initialized';
-    this.Status();
-    // default to get first 100 items
-    this.getItems(0, 100);
+    return new Promise(function(resolve, reject) {
+        try {
+            if (tenant) {
+                this.Tenant(tenant)
+            }
+            this.MagicDOM()
+            if (!this.payment.stripeStyle.base) {
+                this.setDefaultStripeStyle()
+            }
+            this.getCardPublicKey();
+            this.initDOM(container);
+            this.status.state = 'initialized';
+            this.Status();
+            // default to get first 100 items
+            let res = await this.getItems(0, 100);
+            resolve(res)
+        } catch (e) {
+            this.status.state = 'error';
+            this.status.error = e;
+            reject(e)
+        }
+    }.bind(this))
 }
 
 
