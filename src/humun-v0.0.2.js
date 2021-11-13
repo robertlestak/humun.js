@@ -189,7 +189,7 @@ Humun.initDOM = function(container) {
 
 // Humun.Init initializes the client
 Humun.Init = function(tenant, container) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(async function(resolve, reject) {
         try {
             if (tenant) {
                 this.Tenant(tenant)
